@@ -97,6 +97,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Obtener todos los campos de entrada dentro del paso actual
         const campos = pasoActual.querySelectorAll(".input-required");
 
+        
         // Recorrer los campos de entrada del paso actual
         campos.forEach(function (campo) {
             // Verificar si el campo está en blanco
@@ -183,7 +184,17 @@ function agregarOpcion(selectElement, value, text) {
     selectElement.appendChild(option);
 }
 
+document.getElementById("finalizar").addEventListener("click", function() {
+    // Recuperar los valores de los campos de entrada
+    var campo7Value = document.getElementById("campo7").value;
+    var campo8Value = document.getElementById("campo8").value;
 
+    // Realizar los cálculos
+    var resultado = parseFloat(campo7Value) + parseFloat(campo8Value);
+
+    // Mostrar el presupuesto final
+    alert("El presupuesto final es: " + resultado);
+});
 
 
 
