@@ -15,6 +15,29 @@ document.addEventListener("DOMContentLoaded", function () {
         progressBar.style = `width: ${progreso}%`
     }
 
+    function comprobarCorreo(correo) {
+        // Expresión regular para validar el correo electrónico
+        const expresionRegular = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            
+        return expresionRegular.test(correo);
+    }
+
+    function comprobarTelefono(telefono) {
+        // Expresión regular para validar el número de teléfono
+        const expresionRegular = /^(34|6|7|8|9)(\d{8})$/;
+            
+        // Verificar si el número de teléfono cumple con la expresión regular
+        return expresionRegular.test(telefono);
+    }
+    
+    function comprobarNombreOApellido(nombreOApellido) {
+        // Expresión regular para validar que el primer carácter sea una mayúscula y haya al menos un carácter en minúscula
+        const expresionRegular = /^[a-zA-Z]+(?: [a-zA-Z]+)*$/;
+    
+        // Verificar si la cadena cumple con la expresión regular
+        return expresionRegular.test(nombreOApellido);
+    }
+
     function siguientePaso() {
 
         // Obtener el paso actual visible
@@ -25,8 +48,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Verificar si alguno de los campos está vacío
         let algunCampoVacio = false;
+            
         campos.forEach(function (campo) {
-            if (!campo.value.trim()) {
+            if (!campo.value.trim() || (campo.id == "nombre" && !comprobarNombreOApellido(campo.value.trim())) ||  (campo.id == "apellido" && !comprobarNombreOApellido(campo.value.trim())) || campo.value === "0" || (campo.id == "email" && !comprobarCorreo(campo.value.trim())) || (campo.id == "tel" && !comprobarTelefono(campo.value.trim()))) {                
+
                 algunCampoVacio = true;
                 // Resaltar el campo en rojo si está vacío
                 campo.style.border = "2px solid red";
@@ -75,7 +100,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Recorrer los campos de entrada del paso actual
         campos.forEach(function (campo) {
             // Verificar si el campo está en blanco
-            if (campo.value.trim() === "" || opcionCapital.value == "") {
+            if (campo.value.trim() === "" || (campo.id == "nombre" && !comprobarNombreOApellido(campo.value.trim())) ||  (campo.id == "apellido" && !comprobarNombreOApellido(campo.value.trim())) || campo.value == "0" || (campo.id == "email" && !comprobarCorreo(campo.value.trim())) || (campo.id == "tel" && !comprobarTelefono(campo.value.trim()))) {
                 // Resaltar el campo en rojo
                 campo.style.border = "2px solid red";
                 campo.style.backgroundColor = "#FEE";
@@ -83,7 +108,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 // Agregar evento blur para cada campo para detectar cuando el usuario sale del campo sin completarlo
                 campo.addEventListener("blur", function () {
                     // Si el campo está vacío cuando el usuario sale de él, resaltar en rojo
-                    if (campo.value.trim() === "") {
+                    if (campo.value.trim() === "" || campo.value == "0") {
                         campo.style.border = "2px solid red";
                         campo.style.backgroundColor = "#FEE";
                     }
@@ -105,6 +130,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             });
         });
+        
     }
 
 
@@ -125,91 +151,37 @@ document.addEventListener("DOMContentLoaded", function () {
     formulario.addEventListener("submit", (e) => e.preventDefault());
 });
 
-document.addEventListener("DOMContentLoaded", function () {
-    const selectPaises = document.getElementById("selectPaises");
+document.getElementById('selectPlanta').addEventListener('change', function () {
+    var plantaSeleccionada = this.value;
+    var departamentoSelect = document.getElementById('selectDepartamento');
+    departamentoSelect.innerHTML = ''; // Limpiar las opciones anteriores
 
-    // Diccionario de capitales en inglés y su equivalente en español
-    const capitalesDict = {
-        "Tallinn": "Tallin",
-        "Prague": "Praga",
-        "Copenhagen": "Copenhague",
-        "Paris": "París",
-        "Berlin": "Berlín",
-        "Athens": "Atenas",
-        "Rome": "Roma",
-        "Budapest": "Budapest",
-        "Dublin": "Dublín",
-        "Vilnius": "Vilna",
-        "Valletta": "La Valeta",
-        "Amsterdam": "Ámsterdam",
-        "Warsaw": "Varsovia",
-        "Lisbon": "Lisboa",
-        "Ljubljana": "Liubliana",
-        "Stockholm": "Estocolmo",
-        "Bern": "Berna",
-        "London": "Londres",
-        "Kyiv": "Kiev",
-        "Sarajevo": "Sarajevo",
-        "Chișinău": "Chisináu",
-        "Monaco": "Mónaco",
-        "Podgorica": "Podgorica",
-        "Skopje": "Skopie",
-        "Oslo": "Oslo",
-        "Belgrade": "Belgrado",
-        "Brussels": "Bruselas",
-        "Andorra la Vella": "Andorra la Vieja",
-        "Vatican City": "Ciudad del Vaticano",
-        "Moscow": "Moscú",
-        "Reykjavik": "Reikiavik",
-        "St. Peter Port": "St. Peter port",
-        "Douglas": "Douglas",
-        "Luxembourg": "Ciudad de Luxemburgo",
-        "Saint Helier": "Saint Helier",
-        "Vienna": "Viena",
-        "Bucharest": "Bucarest"
-    };
+    if (plantaSeleccionada === 'plantaCentral') {
+        agregarOpcion(departamentoSelect, 'software', 'Departamento de Ingeniería de Software');
+        agregarOpcion(departamentoSelect, 'desarrolloWeb', 'Departamento de Desarrollo Web');
+        agregarOpcion(departamentoSelect, 'seguridadInformatica', 'Departamento de Seguridad Informática');
+        agregarOpcion(departamentoSelect, 'infraestructura', 'Departamento de Infraestructura Tecnológica');
+    } else if (plantaSeleccionada === 'plantaProduccion') {
+        agregarOpcion(departamentoSelect, 'experienciaUsuario', 'Departamento de Experiencia de Usuario (UX)');
+        agregarOpcion(departamentoSelect, 'investigacion', 'Departamento de Investigación y Desarrollo (I+D)');
+        agregarOpcion(departamentoSelect, 'mantenimiento', 'Departamento de Mantenimiento y Soporte');
+        agregarOpcion(departamentoSelect, 'logistica', 'Departamento de Logística');
+    } else if (plantaSeleccionada == 'plantaOperaciones') {
+        agregarOpcion(departamentoSelect, 'gestionProyectos', 'Departamento de Gestión de Proyectos');
+        agregarOpcion(departamentoSelect, 'recursosHumanos', 'Departamento de Gestión de Recursos Humanos');
+        agregarOpcion(departamentoSelect, 'operacionProcesos', 'Departamento de Operaciones y Procesos');
+        agregarOpcion(departamentoSelect, 'controlCalidad', 'Departamento de Control de Calidad');
 
-    // Obtener la lista de países y sus capitales
-    fetch("https://restcountries.com/v3.1/region/europe")
-        .then(response => response.json())
-        .then(data => {
-            // Obtener solo los nombres de los países europeos en español
-            const paises = data.map(country => country.translations.spa.common);
-
-            // Generar opciones para el selector de países
-            generarOpciones(selectPaises, paises);
-
-            // Manejar el cambio de selección en el selector de países
-            selectPaises.addEventListener("change", function () {
-                const paisSeleccionado = selectPaises.value;
-                // Encontrar el país seleccionado en los datos ya obtenidos
-                const paisData = data.find(country => country.translations.spa.common === paisSeleccionado);
-                const capitalIngles = paisData ? paisData.capital?.[0] || "No disponible" : "No disponible";
-                console.log(capitalIngles)
-                const capitalSeleccionada = capitalesDict[capitalIngles] || capitalIngles;
-                // Limpiar el selector de ciudades y agregar la capital seleccionada
-                capital.value = "";
-
-                const opcionCapital = document.getElementById("capital");
-                opcionCapital.text = capitalSeleccionada;
-                opcionCapital.value = capitalSeleccionada;
-
-            });
-        })
-        .catch(error => {
-            console.error("Error al obtener países y capitales:", error);
-        });
-
-    // Función para generar opciones en un select
-    function generarOpciones(selectElement, opciones) {
-        opciones.forEach(opcion => {
-            var opcionElement = document.createElement("option");
-            opcionElement.text = opcion;
-            opcionElement.value = opcion;
-            selectElement.add(opcionElement);
-        });
     }
 });
+
+// Función auxiliar para agregar opciones a un select
+function agregarOpcion(selectElement, value, text) {
+    var option = document.createElement('option');
+    option.value = value;
+    option.textContent = text;
+    selectElement.appendChild(option);
+}
 
 
 
