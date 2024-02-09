@@ -18,27 +18,28 @@ document.addEventListener("DOMContentLoaded", function () {
     function comprobarCorreo(correo) {
         // Expresión regular para validar el correo electrónico
         const expresionRegular = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            
+
         return expresionRegular.test(correo);
     }
 
     function comprobarTelefono(telefono) {
         // Expresión regular para validar el número de teléfono
         const expresionRegular = /^(34|6|7|8|9)(\d{8})$/;
-            
+
         // Verificar si el número de teléfono cumple con la expresión regular
         return expresionRegular.test(telefono);
     }
-    
+
     function comprobarNombreOApellido(nombreOApellido) {
         // Expresión regular para validar que el primer carácter sea una mayúscula y haya al menos un carácter en minúscula
         const expresionRegular = /^[a-zA-Z]+(?: [a-zA-Z]+)*$/;
-    
+
         // Verificar si la cadena cumple con la expresión regular
         return expresionRegular.test(nombreOApellido);
     }
 
     function siguientePaso() {
+
 
         // Obtener el paso actual visible
         const pasoVisible = document.querySelector('.paso:not([style*="display: none"])');
@@ -48,9 +49,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Verificar si alguno de los campos está vacío
         let algunCampoVacio = false;
-            
+
         campos.forEach(function (campo) {
-            if (!campo.value.trim() || (campo.id == "nombre" && !comprobarNombreOApellido(campo.value.trim())) ||  (campo.id == "apellido" && !comprobarNombreOApellido(campo.value.trim())) || campo.value === "0" || (campo.id == "email" && !comprobarCorreo(campo.value.trim())) || (campo.id == "tel" && !comprobarTelefono(campo.value.trim()))) {                
+            if (!campo.value.trim() || (campo.id == "nombre" && !comprobarNombreOApellido(campo.value.trim())) || (campo.id == "apellido" && !comprobarNombreOApellido(campo.value.trim())) || campo.value === "0" || (campo.id == "email" && !comprobarCorreo(campo.value.trim())) || (campo.id == "tel" && !comprobarTelefono(campo.value.trim()))) {
 
                 algunCampoVacio = true;
                 // Resaltar el campo en rojo si está vacío
@@ -68,14 +69,15 @@ document.addEventListener("DOMContentLoaded", function () {
             comprobarInput();
 
         } else {
-
-            pasos[pasoActual - 1].style.display = "none";
-            pasoActual++;
-            if (pasoActual > pasos.length) {
-                pasoActual = pasos.length;
+            if (verificarSeleccion()) {
+                pasos[pasoActual - 1].style.display = "none";
+                pasoActual++;
+                if (pasoActual > pasos.length) {
+                    pasoActual = pasos.length;
+                }
+                pasos[pasoActual - 1].style.display = "block";
+                actualizarBarraDeProgreso();
             }
-            pasos[pasoActual - 1].style.display = "block";
-            actualizarBarraDeProgreso();
         }
     }
 
@@ -97,11 +99,11 @@ document.addEventListener("DOMContentLoaded", function () {
         // Obtener todos los campos de entrada dentro del paso actual
         const campos = pasoActual.querySelectorAll(".input-required");
 
-        
+
         // Recorrer los campos de entrada del paso actual
         campos.forEach(function (campo) {
             // Verificar si el campo está en blanco
-            if (campo.value.trim() === "" || (campo.id == "nombre" && !comprobarNombreOApellido(campo.value.trim())) ||  (campo.id == "apellido" && !comprobarNombreOApellido(campo.value.trim())) || campo.value == "0" || (campo.id == "email" && !comprobarCorreo(campo.value.trim())) || (campo.id == "tel" && !comprobarTelefono(campo.value.trim()))) {
+            if (campo.value.trim() === "" || (campo.id == "nombre" && !comprobarNombreOApellido(campo.value.trim())) || (campo.id == "apellido" && !comprobarNombreOApellido(campo.value.trim())) || campo.value == "0" || (campo.id == "email" && !comprobarCorreo(campo.value.trim())) || (campo.id == "tel" && !comprobarTelefono(campo.value.trim()))) {
                 // Resaltar el campo en rojo
                 campo.style.border = "2px solid red";
                 campo.style.backgroundColor = "#FEE";
@@ -131,7 +133,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             });
         });
-        
+
     }
 
 
@@ -184,7 +186,7 @@ function agregarOpcion(selectElement, value, text) {
     selectElement.appendChild(option);
 }
 
-document.getElementById("finalizar").addEventListener("click", function() {
+document.getElementById("finalizar").addEventListener("click", function () {
     // Recuperar los valores de los campos de entrada
     var campo7Value = document.getElementById("campo7").value;
     var campo8Value = document.getElementById("campo8").value;
@@ -198,7 +200,22 @@ document.getElementById("finalizar").addEventListener("click", function() {
 
 
 
+function verificarSeleccion() {
+    var opciones = document.getElementsByName('genero');
+    var seleccionado = false;
+    for (var i = 0; i < opciones.length; i++) {
+        if (opciones[i].checked) {
+            seleccionado = true;
+            break;
+        }
+    }
 
+    if (!seleccionado) {
+        alert("Seleccione su género antes de continuar.");
+    }
+
+    return seleccionado;
+}
 
 
 
