@@ -213,7 +213,6 @@ function verificarSeleccion() {
     if (!seleccionado) {
         alert("Seleccione su género antes de continuar.");
     }
-
     return seleccionado;
 }
 

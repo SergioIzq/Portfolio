@@ -3,6 +3,7 @@
 
 body {
     font-family: "Roboto Condensed", sans-serif;
+    color: #5a5c4d;
 }
 
 /* header */
@@ -14,7 +15,7 @@ body {
 /* main */
 
 .main-content{
-    height: 92vh;
+    min-height: 70vh; /* Establece una altura mínima del 40% de la altura del viewport */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -33,9 +34,48 @@ body {
     overflow: auto;
     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.3);
     border-radius: 1rem;
+    background-color: #D4CBE5;
+    
 }
 
 .btn span{
     margin-left: 10px;
 }
 
+.navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #D4CBE5;
+}
+
+.navbar .navbar-brand {
+    color: #5a5c4d; 
+    transition: background-color 0.3s ease; /* Efecto de transición */
+    border-radius: 8px;
+}
+
+.navbar .navbar-brand:hover {
+    background-color: #BEB1D6; /* Cambia el color de fondo al hacer hover */
+    border-radius: 8px;
+}
+
+.navbar-brand {
+    font-size: 40px;
+    font-weight: bold;
+}
+
+table tbody thead th tr {
+    text-align: center;
+    color: #5a5c4d;
+}
+
+.btn {
+    background-color: #a48ad3;
+    border-color: #a48ad3;
+}
+
+.btn.active {
+    background-color: #a48ad3;
+    border-color: #a48ad3;
+}

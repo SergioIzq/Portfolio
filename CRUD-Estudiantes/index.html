@@ -16,7 +16,7 @@
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <nav class="navbar navbar-expand-sm">
             <a class="navbar-brand" href="#">CRUD con JavaScript</a>
         </nav>
     </header>
@@ -49,8 +49,13 @@
                 </tbody>
             </table>
         </div>
-    </main>
 
+    </main>
+    <div class="pagination-container">
+        <ul class="pagination justify-content-center">
+            <!-- Botones de paginación se generarán aquí dinámicamente -->
+        </ul>
+    </div>
     <!-- Modal -->
     <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -63,29 +68,29 @@
                     <form id="register-form">
                         <div class="mb-3">
                             <label for="formControlNombre" class="form-label">Nombre</label>
-                            <input type="text" name="nombre" class="form-control" id="formControlNombre"
+                            <input type="text" name="nombre" class="form-control input-required" id="nombre"
                                 placeholder="Introduce el nombre">
                         </div>
                         <div class="mb-3">
                             <label for="formControlApellido1" class="form-label">Apellido</label>
-                            <input type="text" name="apellido1" class="form-control" id="formControlApellido1"
+                            <input type="text" name="apellido1" class="form-control input-required" id="apellido1"
                                 placeholder="Introduce el primer apellido">
                         </div>
                         <div class="mb-3">
                             <label for="formControlApellido2" class="form-label">Apellido 2</label>
-                            <input type="text" name="apellido2" class="form-control" id="formControlApellido2"
+                            <input type="text" name="apellido2" class="form-control input-required" id="apellido2"
                                 placeholder="Introduce el segundo apellido">
                         </div>
                         <label for="formControlTelefono" class="form-label">Teléfono</label>
                         <div class="input-group smb-3">
                             <span class="input-group-text" id="basic-addon1"><i class="fa fa-phone"></i></span>
-                            <input type="text" name="telefono" class="form-control" id="formControlTelefono"
+                            <input type="text" name="telefono" class="form-control input-required" id="formControlTelefono"
                                 placeholder="Introduce el teléfono" aria-describedby="basic-addon1">
                         </div>
                         <label for="formControlEmail" class="form-label">Correo-e</label>
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1"><i class="fa fa-envelope"></i></span>
-                            <input type="text" name="email" class="form-control" id="formControlEmail"
+                            <input type="text" name="email" class="form-control input-required" id="formControlEmail"
                                 placeholder="Introduce el correo-e">
                         </div>
                         <label for="formControlDescripcion" class="form-label">Descripción</label>
@@ -119,23 +124,23 @@
                         <input type="hidden" id="edit-id">
                         <div class="mb-3">
                             <label for="edit-nombre" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" id="edit-nombre">
+                            <input type="text" class="form-control edit-required" id="edit-nombre">
                         </div>
                         <div class="mb-3">
                             <label for="edit-apellido1" class="form-label">Apellido 1</label>
-                            <input type="text" class="form-control" id="edit-apellido1">
+                            <input type="text" class="form-control edit-required" id="edit-apellido1">
                         </div>
                         <div class="mb-3">
                             <label for="edit-apellido2" class="form-label">Apellido 2</label>
-                            <input type="text" class="form-control" id="edit-apellido2">
+                            <input type="text" class="form-control edit-required" id="edit-apellido2">
                         </div>
                         <div class="mb-3">
                             <label for="edit-telefono" class="form-label">Teléfono</label>
-                            <input type="text" class="form-control" id="edit-telefono">
+                            <input type="text" class="form-control edit-required" id="edit-telefono">
                         </div>
                         <div class="mb-3">
                             <label for="edit-email" class="form-label">Correo-e</label>
-                            <input type="text" class="form-control" id="edit-email">
+                            <input type="text" class="form-control edit-required" id="edit-email">
                         </div>
                         <div class="mb-3">
                             <label for="edit-descripcion" class="form-label">Descripción</label>
