@@ -69,3 +69,7 @@ canvas {
     cursor: pointer;
     vertical-align: middle;
 }
+
+.label {
+    font-size: 30px;
+}

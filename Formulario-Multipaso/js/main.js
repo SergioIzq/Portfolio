@@ -240,80 +240,78 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Función para mostrar los gráficos
     function mostrarGraficos(salarioActual, nuevoSalario) {
-        // Obtener el contexto del primer gráfico (salario actual)
-        const ctx1 = document.getElementById('graficoSalarioActual').getContext('2d');
+        if (salarioActual && nuevoSalario) {
+            // Obtener el contexto del primer gráfico (salario actual)
+            const ctx1 = document.getElementById('graficoSalarioActual').getContext('2d');
 
-        if (!chart1) {
-            // Si no existe un gráfico anteriormente, crear uno nuevo
-            chart1 = new Chart(ctx1, {
-                type: 'bar',
-                data: {
-                    labels: ['Salario Actual'],
-                    datasets: [{
-                        label: 'Salario Actual',
-                        data: [salarioActual],
-                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                        borderColor: 'rgba(255, 99, 132, 1)',
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            suggestedMax: salarioActual + 1000 // Establecer el máximo del eje y
+            if (!chart1) {
+                // Si no existe un gráfico anteriormente, crear uno nuevo
+                chart1 = new Chart(ctx1, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Salario Actual'],
+                        datasets: [{
+                            label: 'Salario Actual',
+                            data: [salarioActual],
+                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                            borderColor: 'rgba(255, 99, 132, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                suggestedMax: salarioActual + 1000 // Establecer el máximo del eje y
+                            }
                         }
                     }
-                }
-            });
-        } else {
-            // Si el gráfico ya existe, actualizar sus datos
-            chart1.data.datasets[0].data = [salarioActual];
-            chart1.options.scales.y.suggestedMax = salarioActual + 1000; // Actualizar el máximo del eje y
-            chart1.update();
-        }
+                });
+            } else {
+                // Si el gráfico ya existe, actualizar sus datos
+                chart1.data.datasets[0].data = [salarioActual];
+                chart1.options.scales.y.suggestedMax = salarioActual + 1000; // Actualizar el máximo del eje y
+                chart1.update();
+            }
 
-        // Obtener el contexto del segundo gráfico (nuevo salario)
-        const ctx2 = document.getElementById('graficoNuevoSalario').getContext('2d');
+            // Obtener el contexto del segundo gráfico (nuevo salario)
+            const ctx2 = document.getElementById('graficoNuevoSalario').getContext('2d');
 
-        if (!chart2) {
-            // Si no existe un gráfico anteriormente, crear uno nuevo
-            chart2 = new Chart(ctx2, {
-                type: 'bar',
-                data: {
-                    labels: ['Nuevo Salario'],
-                    datasets: [{
-                        label: 'Nuevo Salario',
-                        data: [nuevoSalario],
-                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                        borderColor: 'rgba(54, 162, 235, 1)',
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            suggestedMax: nuevoSalario // Establecer el máximo del eje y
+            if (!chart2) {
+                // Si no existe un gráfico anteriormente, crear uno nuevo
+                chart2 = new Chart(ctx2, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Nuevo Salario'],
+                        datasets: [{
+                            label: 'Nuevo Salario',
+                            data: [nuevoSalario],
+                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                suggestedMax: nuevoSalario // Establecer el máximo del eje y
+                            }
                         }
                     }
-                }
-            });
-        } else {
-            // Si el gráfico ya existe, actualizar sus datos
-            chart2.data.datasets[0].data = [nuevoSalario];
-            chart2.options.scales.y.suggestedMax = nuevoSalario; // Actualizar el máximo del eje y
-            chart2.update();
+                });
+            } else {
+                // Si el gráfico ya existe, actualizar sus datos
+                chart2.data.datasets[0].data = [nuevoSalario];
+                chart2.options.scales.y.suggestedMax = nuevoSalario; // Actualizar el máximo del eje y
+                chart2.update();
+            }
+
+            // Mostrar el contenedor de gráficos
+            const graficosContainer = document.querySelector('.graficos');
+            graficosContainer.style.display = 'flex';
         }
-
-        // Mostrar el contenedor de gráficos
-        const graficosContainer = document.querySelector('.graficos');
-        graficosContainer.style.display = 'flex';
-
     }
-
-
-
 
     function calcularAumentoSalarial(fechaIngreso, salarioActual) {
         // Obtener la fecha actual

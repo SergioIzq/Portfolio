@@ -23,7 +23,6 @@
         <div class="row justify-content-center">
             <div class="shadow p-3 mb-5 bg-body rounded">
                 <form id="formRegistro">
-
                     <div class="paso" data-paso="1">
                         <h2>Registrar nombre y primer apellido</h2>
                         <div class="input-group p-2">
@@ -105,14 +104,14 @@
                         </div>
                     </div>
                     <div class="paso" data-paso="4">
-                        <h2>Registre el día de contratación y salario actual</h2>
+                        <h2>Registre el día de contratación y salario mensual actual</h2>
                         <div class="input-group p-2">
                             <input type="date" class="form-control input-required" id="start" name="trip-start"
                                 min="2000-01-01" max="2023-12-31" />
                         </div>
                         <div class="input-group p-2">
-                            <input type="number" class="form-control input-required" name="campo8" id="salario"
-                                placeholder="Campo8" />
+                            <input type="number" class="form-control input-required" name="salario" id="salario"
+                                placeholder="Salario" />
                         </div>
                         <div class="d-flex p-2 justify-content-between">
                             <button class="btn btn-outline-primary btn-sm btn-anterior">Anterior</button>
@@ -133,7 +132,6 @@
     <div class="graficos">
         <canvas id="graficoSalarioActual" width="400" height="400"></canvas>
         <canvas id="graficoNuevoSalario" width="400" height="400"></canvas>
-
     </div>
     <script src="js/main.js"></script>
 </body>
