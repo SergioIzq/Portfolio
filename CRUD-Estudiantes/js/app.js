@@ -185,7 +185,6 @@ async function registrarNuevoEstudiante() {
 const tablaEstudiantes = document.querySelector('tbody');
 
 // Función para mostrar todos los estudiantes en la tabla HTML
-// Función para mostrar todos los estudiantes en la tabla HTML
 async function mostrarEstudiantes() {
     try {
         // Obtén todos los documentos de la colección "estudiantes"

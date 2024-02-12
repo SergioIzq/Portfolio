@@ -70,12 +70,18 @@ table tbody thead th tr {
     color: #5a5c4d;
 }
 
-.btn {
+
+/* 
+.btn-primary {
     background-color: #a48ad3;
     border-color: #a48ad3;
 }
 
-.btn.active {
+.btn-primary:hover{
     background-color: #a48ad3;
     border-color: #a48ad3;
 }
+
+.btn-active {
+
+} */

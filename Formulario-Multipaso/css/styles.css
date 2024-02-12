@@ -1,7 +1,71 @@
+.container {
+    font-family: 'Roboto', sans-serif;
+    margin-top: 40px;
+
+}
+
 .paso {
     display: none;
 }
 
 .paso:first-child {
     display: block;
+}
+
+.graficos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+canvas {
+    max-width: 700px;
+    max-height: 500px;
+    margin: 10px; /* Espacio entre los gráficos */
+}
+
+.label{
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+.radios {
+    width: 500px;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Estilo para el contenedor de los radio buttons */
+.form-check {
+    margin-bottom: 10px; /* Espacio entre cada grupo de radio buttons */
+}
+
+/* Estilo para el indicador de los radio buttons */
+.form-check-input[type="radio"] {
+    width: 20px; 
+    height: 20px; 
+    margin-right: 5px; 
+    cursor: pointer; 
+    appearance: none; 
+    -webkit-appearance: none; 
+    -moz-appearance: none; 
+    border: 2px solid #007bff; /* Borde del indicador */
+    border-radius: 50%; /* Bordes redondeados para hacerlo circular */
+    outline: none; /* Elimina el contorno al enfocar */
+    vertical-align: middle; 
+}
+
+/* Estilo para el indicador de los radio buttons cuando está seleccionado */
+.form-check-input[type="radio"]:checked {
+    background-color: #007bff; 
+}
+
+/* Estilo para la etiqueta de los radio buttons */
+.form-check-label {
+    cursor: pointer;
+    vertical-align: middle;
 }
