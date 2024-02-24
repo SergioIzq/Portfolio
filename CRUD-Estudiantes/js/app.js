@@ -1,6 +1,6 @@
 // Importa las funciones que necesitas de los SDK que necesitas
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+import { getFirestore, collection, addDoc, getDocs, getDoc, deleteDoc, doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
 // Configuración de tu aplicación web Firebase
 const firebaseConfig = {
@@ -164,7 +164,7 @@ async function registrarNuevoEstudiante() {
                 apellido2: apellido2,
                 telefono: registerForm["telefono"].value,
                 email: registerForm["email"].value,
-                desc: registerForm["descripcion"].value
+                descripcion: registerForm["descripcion"].value
             });
 
             alert("¡Nuevo estudiante registrado!");
@@ -254,9 +254,9 @@ function agregarEventosEliminar() {
 }
 
 // Función para agregar eventos de clic a los botones de editar estudiante
-function agregarEventosEditar() {
+async function agregarEventosEditar() {    
     document.querySelectorAll('.editar-estudiante').forEach(button => {
-        button.addEventListener('click', () => {
+        button.addEventListener('click', async () => {
             // Obtener los datos del estudiante de la fila correspondiente
             const fila = button.closest('tr');
             const idDocumento = fila.dataset.docId; // Obtener el ID único del documento de Firebase
@@ -265,13 +265,28 @@ function agregarEventosEditar() {
             const apellido2 = fila.querySelector('td:nth-child(4)').textContent;
             const telefono = fila.querySelector('td:nth-child(5)').textContent;
             const email = fila.querySelector('td:nth-child(6)').textContent;
-            const descripcion = ''; // Puedes obtener la descripción si es necesario
 
-            // Mostrar el modal de edición con los datos del estudiante
-            mostrarModalEdicion(idDocumento, nombre, apellido1, apellido2, telefono, email, descripcion);
+            try {
+                // Obtener el documento del estudiante desde Firebase
+                const docSnapshot = await getDoc(doc(db, "estudiantes", idDocumento));
+                
+                if (docSnapshot.exists()) {
+                    // Obtener los datos del documento
+                    const datosEstudiante = docSnapshot.data();
+                    const descripcion = datosEstudiante.descripcion;
+                    
+                    // Mostrar el modal de edición con los datos del estudiante
+                    mostrarModalEdicion(idDocumento, nombre, apellido1, apellido2, telefono, email, descripcion);
+                } else {
+                    console.log("El documento no existe.");
+                }
+            } catch (error) {
+                console.error("Error al obtener el documento:", error);
+            }
         });
     });
 }
+
 
 // Función para mostrar el modal de edición con los datos del estudiante
 function mostrarModalEdicion(idDocumento, nombre, apellido1, apellido2, telefono, email, descripcion) {
@@ -326,7 +341,8 @@ async function actualizarDatosEstudiante() {
         const querySnapshot = await getDocs(collection(db, "estudiantes"));
         querySnapshot.forEach((doc) => {
             const estudiante = doc.data();
-            if (estudiante.nombre === nombre && estudiante.apellido1 === apellido1 && estudiante.apellido2 === apellido2) {
+            // Condición para no tener en cuenta al estudiante seleccionado con la base de datos
+            if (doc.id != id && estudiante.nombre === nombre && estudiante.apellido1 === apellido1 && estudiante.apellido2 === apellido2) {
                 alert("Ya existe un estudiante con el mismo nombre y apellidos");
                 algunCampoVacio = true;
             }
